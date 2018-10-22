@@ -7,7 +7,7 @@ package br.com.ibits.telas;
 
 /**
  *
- * @author henri
+ * @author Ibits
  */
 import java.sql.*;
 import br.com.ibits.dal.ModuloConexao;
@@ -45,8 +45,8 @@ public class TelaCompras extends javax.swing.JInternalFrame {
         }
     }
     
-     //Adicionando usuarios
-    private void Adicionar(){
+     //Salvando Ordem de Compras
+    private void Salvar(){
         String sql = "insert into tbCompras(idProd,qtd, medida) Values(?,?,?)";
         try {
             pst = conexao.prepareStatement(sql);
@@ -71,6 +71,60 @@ public class TelaCompras extends javax.swing.JInternalFrame {
         }
     }    
    
+    //Adcionando produtos na lista
+    private void Adicionar(){
+        String sql = "insert into tbCompras(qtd, medida,idProd) Values(?,?,?)";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(3, txtCompIdProd.getText());
+            pst.setString(1, txtCompQtd.getText());
+            pst.setString(2, txtCompMed.getText());
+            // Validação dos campos obrigatórios
+            if ((txtCompQtd.getText().isEmpty())) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios"); 
+            }else {
+            //Atualiazar tabela Usuario
+            //Confirma a inserção dos dado
+            int adicionado = pst.executeUpdate();
+            //apoio de entedimento
+            //System.out.println(adicionado);
+            if (adicionado > 0){
+               JOptionPane.showMessageDialog(null, "Faccionista adicionado com sucesso"); 
+                //Limpando os campos
+                txtCompQtd.setText(null); 
+            }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+    }
+    
+    //Setar Campos
+    private void setar_Campos(){
+         String sql = "Select * from tbCompras";
+         try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                cboCompMat.addItem(rs.getString("nome"));
+                pst.setString(1, txtCompIdProd.getText());
+                pst.setString(2, txtCompQtd.getText());
+                pst.setString(3, txtCompMed.getText());
+            
+              int setar = tblCompras.getSelectedRow();
+              txtCompIdProd.setText(tblCompras.getModel().getValueAt(setar, 1).toString());
+              pst.setString(2,cboCompMat.getSelectedItem().toString());
+              txtCompQtd.setText(tblCompras.getModel().getValueAt(setar, 3).toString());
+              txtCompMed.setText(tblCompras.getModel().getValueAt(setar, 4).toString());
+              pst.setString(1, (String) cboCompMat.getSelectedItem().toString());
+            }
+         } catch (SQLException ex) {
+             Logger.getLogger(TelaCompras.class.getName()).log(Level.SEVERE, null, ex);
+         }
+       
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -154,6 +208,11 @@ public class TelaCompras extends javax.swing.JInternalFrame {
         jLabel4.setText("Medida:");
 
         btnOk.setText("Add");
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Alterar");
 
@@ -240,18 +299,24 @@ public class TelaCompras extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblComprasMouseClicked
-        // TODO add your handling code here:
+        // Setando campos
+        setar_Campos();
      
     }//GEN-LAST:event_tblComprasMouseClicked
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // Salvar dados
-        Adicionar();
+        Salvar();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void tblComprasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblComprasKeyReleased
         // Pesquisa materiais
     }//GEN-LAST:event_tblComprasKeyReleased
+
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        // Adicionando na lista
+        Adicionar();
+    }//GEN-LAST:event_btnOkActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
