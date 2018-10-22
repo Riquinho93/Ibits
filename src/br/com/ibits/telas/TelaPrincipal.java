@@ -5,8 +5,8 @@
  */
 package br.com.ibits.telas;
 
-import java.text.DateFormat;
-import java.util.Date;
+//import java.text.DateFormat;
+//import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,15 +32,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         Desktop = new javax.swing.JDesktopPane();
-        lblUsuario = new javax.swing.JLabel();
-        lblData = new javax.swing.JLabel();
         Menu = new javax.swing.JMenuBar();
         menCad = new javax.swing.JMenu();
         menCadCort = new javax.swing.JMenuItem();
         menCadFac = new javax.swing.JMenuItem();
         menCadFunc = new javax.swing.JMenuItem();
         menCadOs = new javax.swing.JMenuItem();
+        menCadComp = new javax.swing.JMenuItem();
+        menCadCortes = new javax.swing.JMenuItem();
         menProd = new javax.swing.JMenu();
+        menProdCadProd = new javax.swing.JMenuItem();
         menProdProd = new javax.swing.JMenuItem();
         menRel = new javax.swing.JMenu();
         menRelServ = new javax.swing.JMenuItem();
@@ -58,24 +59,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        Desktop.setPreferredSize(new java.awt.Dimension(675, 480));
+        Desktop.setPreferredSize(new java.awt.Dimension(675, 500));
 
         javax.swing.GroupLayout DesktopLayout = new javax.swing.GroupLayout(Desktop);
         Desktop.setLayout(DesktopLayout);
         DesktopLayout.setHorizontalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 675, Short.MAX_VALUE)
+            .addGap(0, 880, Short.MAX_VALUE)
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
-
-        lblUsuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblUsuario.setText("Usuário");
-
-        lblData.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblData.setText("Data");
 
         menCad.setText("Cadastrar");
         menCad.addActionListener(new java.awt.event.ActionListener() {
@@ -121,9 +116,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menCad.add(menCadOs);
 
+        menCadComp.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
+        menCadComp.setText("Compras");
+        menCadComp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menCadCompActionPerformed(evt);
+            }
+        });
+        menCad.add(menCadComp);
+
+        menCadCortes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
+        menCadCortes.setText("Cortes");
+        menCad.add(menCadCortes);
+
         Menu.add(menCad);
 
         menProd.setText("Produto");
+
+        menProdCadProd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
+        menProdCadProd.setText("Cadastrar ");
+        menProdCadProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menProdCadProdActionPerformed(evt);
+            }
+        });
+        menProd.add(menProdCadProd);
 
         menProdProd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
         menProdProd.setText("Produtos");
@@ -178,25 +195,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUsuario)
-                    .addComponent(lblData))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(lblUsuario)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblData))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(Desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -205,14 +211,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menCadCortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadCortActionPerformed
-        // TODO add your handling code here:
+         // Abrir o form cortador dentro do desktop pane
+        TelaCortador cortador = new TelaCortador();
+        cortador.setVisible(true);
+        Desktop.add(cortador);
     }//GEN-LAST:event_menCadCortActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // Data atual do sistema quando inicia
-        Date data = new Date();
-        DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
-        lblData.setText(formatador.format(data));
+       // Date data = new Date();
+       // DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
+       // lblData.setText(formatador.format(data));
     }//GEN-LAST:event_formWindowActivated
 
     private void menOpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menOpActionPerformed
@@ -258,6 +267,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Desktop.add(os);
     }//GEN-LAST:event_menCadOsActionPerformed
 
+    private void menCadCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadCompActionPerformed
+        // tela Compras
+        TelaCompras comp = new TelaCompras();
+        comp.setVisible(true);
+        Desktop.add(comp);
+        
+    }//GEN-LAST:event_menCadCompActionPerformed
+
+    private void menProdCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menProdCadProdActionPerformed
+        // Tela criar produtos
+        TelaCriarProdutos prod = new TelaCriarProdutos();
+        prod.setVisible(true);
+        Desktop.add(prod);
+    }//GEN-LAST:event_menProdCadProdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -296,18 +320,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenuBar Menu;
-    private javax.swing.JLabel lblData;
-    public static javax.swing.JLabel lblUsuario;
     private javax.swing.JMenu menAjud;
     private javax.swing.JMenuItem menAjudSob;
     public static javax.swing.JMenu menCad;
+    private javax.swing.JMenuItem menCadComp;
     private javax.swing.JMenuItem menCadCort;
+    private javax.swing.JMenuItem menCadCortes;
     private javax.swing.JMenuItem menCadFac;
     public static javax.swing.JMenuItem menCadFunc;
     private javax.swing.JMenuItem menCadOs;
     private javax.swing.JMenu menOp;
     private javax.swing.JMenuItem menOpSair;
     private javax.swing.JMenu menProd;
+    private javax.swing.JMenuItem menProdCadProd;
     private javax.swing.JMenuItem menProdProd;
     private javax.swing.JMenu menRel;
     private javax.swing.JMenuItem menRelServ;

@@ -39,14 +39,14 @@ public class TelaLogin extends javax.swing.JFrame {
                     TelaPrincipal principal = new TelaPrincipal();
                     principal.setVisible(true);
                     TelaPrincipal.menCadFunc.setEnabled(true);
-                    TelaPrincipal.lblUsuario.setText(rs.getString(2));
-                    TelaPrincipal.lblUsuario.setForeground(Color.red);
+                 //   TelaPrincipal.lblUsuario.setText(rs.getString(2));
+               //     TelaPrincipal.lblUsuario.setForeground(Color.red);
                     this.dispose(); //fechando a tela de login
                     conexao.close(); //encerrando a conexao com banco
                 }else{
                     TelaPrincipal principal = new TelaPrincipal();
                     principal.setVisible(true);
-                     TelaPrincipal.lblUsuario.setText(rs.getString(2));
+                   //  TelaPrincipal.lblUsuario.setText(rs.getString(2));
                     this.dispose(); //fechando a tela de login
                     conexao.close(); //encerrando a conexao com banco
                 }    

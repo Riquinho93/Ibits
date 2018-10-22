@@ -5,39 +5,40 @@
  */
 package br.com.ibits.telas;
 
-/**
- *
- * @author Ibits
- */
 import java.sql.*;
 import br.com.ibits.dal.ModuloConexao;
 import javax.swing.JOptionPane;
 //Importando recursos da biblioteca rs2ml.jar
 import net.proteanit.sql.DbUtils;
 
-public class TelaFaccionista extends javax.swing.JInternalFrame {
+/**
+ *
+ * @author henri
+ */
+public class TelaCortador extends javax.swing.JInternalFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+
     /**
-     * Creates new form TelaFaccionista
+     * Creates new form TelaCortador
      */
-    public TelaFaccionista() {
+    public TelaCortador() {
         initComponents();
         conexao = ModuloConexao.conector();
     }
     
-    //Adicionando usuarios
+     //Adicionando usuarios
     private void Adicionar(){
-        String sql = "insert into tbfaccionista(nomeFac,endFac,fone,email) Values(?,?,?,?)";
+        String sql = "insert into tbcortador(nomeCort,endCort,fone,email) Values(?,?,?,?)";
         try {
             pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtFacNome.getText());
-            pst.setString(2, txtFacEndereco.getText());
-            pst.setString(3, txtFacTelefone.getText());
-            pst.setString(4, txtFacEmail.getText());
+            pst.setString(1, txtCortNome.getText());
+            pst.setString(2, txtCortEndereco.getText());
+            pst.setString(3, txtCortTelefone.getText());
+            pst.setString(4, txtCortEmail.getText());
             // Validação dos campos obrigatórios
-            if ((txtFacNome.getText().isEmpty()) || (txtFacEndereco.getText().isEmpty()) || (txtFacTelefone.getText().isEmpty())) {
+            if ((txtCortNome.getText().isEmpty()) || (txtCortEndereco.getText().isEmpty()) || (txtCortTelefone.getText().isEmpty())) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios"); 
             } else {
             //Atualiazar tabela Usuario
@@ -46,12 +47,12 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
             //apoio de entedimento
             //System.out.println(adicionado);
             if (adicionado > 0){
-               JOptionPane.showMessageDialog(null, "Faccionista adicionado com sucesso"); 
+               JOptionPane.showMessageDialog(null, "Cortador adicionado com sucesso"); 
                 //Limpando os campos
-                txtFacNome.setText(null);
-                txtFacEndereco.setText(null);
-                txtFacTelefone.setText(null);
-                txtFacEmail.setText(null);   
+                txtCortNome.setText(null);
+                txtCortEndereco.setText(null);
+                txtCortTelefone.setText(null);
+                txtCortEmail.setText(null);   
             }
             }
         } catch (Exception e) {
@@ -59,17 +60,17 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
         }
     }
     
-    //Metodo pesquisa faccionista pelo nome
+     //Metodo pesquisa faccionista pelo nome
     private void Pesquisar(){
-        String sql = "select * from tbfaccionista where nomeFac like ?";
+        String sql = "select * from tbcortador where nomeCort like ?";
         try {
             pst = conexao.prepareStatement(sql);
             //Passando a caixa de pesquisa para a interrogação
             //Atenção a porcentagem da string sql
-            pst.setString(1, txtFacPesquisar.getText() + "%");
+            pst.setString(1, txtCortPesquisar.getText() + "%");
             rs = pst.executeQuery();
             //Preencha tabela
-            tblFac.setModel(DbUtils.resultSetToTableModel(rs));
+            tblCort.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -77,12 +78,12 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
     
     //Metodo para setar os campos do formulario 
     private void setar_campos(){
-        int setar = tblFac.getSelectedRow();
-        txtFacId.setText(tblFac.getModel().getValueAt(setar, 0).toString());
-        txtFacNome.setText(tblFac.getModel().getValueAt(setar, 1).toString());
-        txtFacEndereco.setText(tblFac.getModel().getValueAt(setar, 2).toString());
-        txtFacTelefone.setText(tblFac.getModel().getValueAt(setar, 3).toString());
-        txtFacEmail.setText(tblFac.getModel().getValueAt(setar, 4).toString());
+        int setar = tblCort.getSelectedRow();
+        txtCortId.setText(tblCort.getModel().getValueAt(setar, 0).toString());
+        txtCortNome.setText(tblCort.getModel().getValueAt(setar, 1).toString());
+        txtCortEndereco.setText(tblCort.getModel().getValueAt(setar, 2).toString());
+        txtCortTelefone.setText(tblCort.getModel().getValueAt(setar, 3).toString());
+        txtCortEmail.setText(tblCort.getModel().getValueAt(setar, 4).toString());
         
         //botão adicionar
         btnAdicionar.setEnabled(false);
@@ -90,15 +91,15 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
     
     // alterar dados dos usuarios
     private void alterar(){
-    String sql = "update tbfaccionista set nomeFac=?,endFac=?,fone=?, email=? where idFac=?";
+    String sql = "update tbcortador set nomeCort=?,endCort=?,fone=?, email=? where idCort=?";
         try {
             pst = conexao.prepareStatement(sql);
-            pst.setString(1,txtFacNome.getText());
-            pst.setString(2,txtFacEndereco.getText());
-            pst.setString(3,txtFacTelefone.getText());
-            pst.setString(4,txtFacEmail.getText());
-            pst.setString(5,txtFacId.getText());
-            if ((txtFacNome.getText().isEmpty()) || (txtFacEndereco.getText().isEmpty()) || (txtFacTelefone.getText().isEmpty())) {
+            pst.setString(1,txtCortNome.getText());
+            pst.setString(2,txtCortEndereco.getText());
+            pst.setString(3,txtCortTelefone.getText());
+            pst.setString(4,txtCortEmail.getText());
+            pst.setString(5,txtCortId.getText());
+            if ((txtCortNome.getText().isEmpty()) || (txtCortEndereco.getText().isEmpty()) || (txtCortTelefone.getText().isEmpty())) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios"); 
             } else {
             //Atualiazar tabela Faccionionista
@@ -109,11 +110,11 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
             if (adicionado > 0){
                JOptionPane.showMessageDialog(null, "Dados alterados com sucesso"); 
                 //Limpando os campos
-                txtFacId.setText(null);
-                txtFacNome.setText(null);
-                txtFacEndereco.setText(null);
-                txtFacTelefone.setText(null);
-                txtFacEmail.setText(null);   
+                txtCortId.setText(null);
+                txtCortNome.setText(null);
+                txtCortEndereco.setText(null);
+                txtCortTelefone.setText(null);
+                txtCortEmail.setText(null);   
                 btnAdicionar.setEnabled(true);
             }
             }
@@ -124,20 +125,20 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
      //Metodo de remover usuários
     private void remover(){
         //Confirmar a remoção do usuário
-        int confirma = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir faccionista?","Atenção" , JOptionPane.YES_NO_OPTION);
+        int confirma = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir cortador?","Atenção" , JOptionPane.YES_NO_OPTION);
         if (confirma == JOptionPane.YES_OPTION){
-        String sql="delete from tbfaccionista where idFac=?";
+        String sql="delete from tbcortador where idCort=?";
             try {
                 pst = conexao.prepareStatement(sql);
-                pst.setString(1, txtFacId.getText());
+                pst.setString(1, txtCortId.getText());
                 int apagado = pst.executeUpdate();
                 if (apagado>0){
                     JOptionPane.showMessageDialog(null, "Faccionista removido com sucesso");
-                    txtFacId.setText(null);
-                    txtFacNome.setText(null);
-                    txtFacEndereco.setText(null);
-                    txtFacTelefone.setText(null);
-                    txtFacEmail.setText(null);   
+                    txtCortId.setText(null);
+                    txtCortNome.setText(null);
+                    txtCortEndereco.setText(null);
+                    txtCortTelefone.setText(null);
+                    txtCortEmail.setText(null);   
                     btnAdicionar.setEnabled(true);
                 }
             } catch (Exception e) {
@@ -145,6 +146,9 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
             }
         }
     }
+
+   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -154,38 +158,30 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtFacNome = new javax.swing.JTextField();
-        txtFacEndereco = new javax.swing.JTextField();
-        txtFacTelefone = new javax.swing.JTextField();
-        txtFacEmail = new javax.swing.JTextField();
+        txtCortEndereco = new javax.swing.JTextField();
+        txtCortTelefone = new javax.swing.JTextField();
+        txtCortEmail = new javax.swing.JTextField();
         btnAdicionar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblFac = new javax.swing.JTable();
+        tblCort = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        txtFacId = new javax.swing.JTextField();
-        txtFacPesquisar = new javax.swing.JTextField();
+        txtCortId = new javax.swing.JTextField();
+        txtCortPesquisar = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtCortNome = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Faccionista");
+        setTitle("Cortador");
         setPreferredSize(new java.awt.Dimension(900, 500));
-
-        jLabel1.setText("Nome*");
-
-        jLabel2.setText("Endereço*");
-
-        jLabel3.setText("Telefone*");
-
-        jLabel4.setText("Email*");
 
         btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ibits/icones/create.png"))); // NOI18N
         btnAdicionar.setToolTipText("Adicionar");
@@ -215,7 +211,7 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
 
         jLabel6.setText("*Campos Obrigatórios");
 
-        tblFac.setModel(new javax.swing.table.DefaultTableModel(
+        tblCort.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -226,22 +222,30 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblFac.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblCort.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblFacMouseClicked(evt);
+                tblCortMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblFac);
+        jScrollPane1.setViewportView(tblCort);
 
-        jLabel7.setText("Id Faccionista");
+        jLabel7.setText("Id Cortador");
 
-        txtFacId.setEnabled(false);
+        txtCortId.setEnabled(false);
 
-        txtFacPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCortPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtFacPesquisarKeyReleased(evt);
+                txtCortPesquisarKeyReleased(evt);
             }
         });
+
+        jLabel1.setText("Nome*");
+
+        jLabel2.setText("Endereço*");
+
+        jLabel3.setText("Telefone*");
+
+        jLabel4.setText("Email*");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -251,7 +255,7 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(txtFacPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCortPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addGap(124, 124, 124)
@@ -276,16 +280,13 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFacEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFacNome, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFacTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFacEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFacId, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtCortEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCortNome, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCortTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCortEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCortId, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(282, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionar, btnAlterar, btnRemover});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -297,28 +298,28 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtFacPesquisar))))
+                            .addComponent(txtCortPesquisar))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtFacId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCortId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFacNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCortNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFacEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCortEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFacTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCortTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFacEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCortEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,12 +337,6 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
         Adicionar();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
-// Evento para setar os campos da tela(Clique direito)
-    private void tblFacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFacMouseClicked
-        // setar campos
-        setar_campos();
-    }//GEN-LAST:event_tblFacMouseClicked
-
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
         alterar();
@@ -352,10 +347,15 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
         remover();
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void txtFacPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFacPesquisarKeyReleased
+    private void tblCortMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCortMouseClicked
+        // setar campos
+        setar_campos();
+    }//GEN-LAST:event_tblCortMouseClicked
+
+    private void txtCortPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCortPesquisarKeyReleased
         // TODO add your handling code here:
         Pesquisar();
-    }//GEN-LAST:event_txtFacPesquisarKeyReleased
+    }//GEN-LAST:event_txtCortPesquisarKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -370,12 +370,12 @@ public class TelaFaccionista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblFac;
-    private javax.swing.JTextField txtFacEmail;
-    private javax.swing.JTextField txtFacEndereco;
-    private javax.swing.JTextField txtFacId;
-    private javax.swing.JTextField txtFacNome;
-    private javax.swing.JTextField txtFacPesquisar;
-    private javax.swing.JTextField txtFacTelefone;
+    private javax.swing.JTable tblCort;
+    private javax.swing.JTextField txtCortEmail;
+    private javax.swing.JTextField txtCortEndereco;
+    private javax.swing.JTextField txtCortId;
+    private javax.swing.JTextField txtCortNome;
+    private javax.swing.JTextField txtCortPesquisar;
+    private javax.swing.JTextField txtCortTelefone;
     // End of variables declaration//GEN-END:variables
 }

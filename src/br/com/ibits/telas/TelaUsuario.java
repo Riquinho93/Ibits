@@ -168,7 +168,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Usuários");
-        setPreferredSize(new java.awt.Dimension(675, 480));
+        setPreferredSize(new java.awt.Dimension(900, 500));
 
         jLabel1.setText(" id*");
 
@@ -252,14 +252,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtUsuSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtUsuNome)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel6)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txtUsuId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(71, 71, 71)
-                                    .addComponent(jLabel5)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cboUsuPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtUsuId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(71, 71, 71)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(cboUsuPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(btnUsuCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,7 +267,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                         .addComponent(btnUsuUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(26, 26, 26))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDelete, btnUsuCreate, btnUsuRead, btnUsuUpdate});
@@ -277,9 +279,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
                 .addComponent(jLabel6)
-                .addGap(33, 33, 33)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsuId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -295,7 +297,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     .addComponent(txtUsuLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(txtUsuSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUsuCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUsuRead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,7 +306,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addGap(51, 51, 51))
         );
 
-        setBounds(0, 0, 675, 480);
+        setBounds(0, 0, 900, 500);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtUsuNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuNomeActionPerformed
